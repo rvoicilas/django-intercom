@@ -2,36 +2,37 @@
     <script>
     var intercomSettings = {
         app_id: '{{intercom_appid}}',
-        email: '{{email_address}}',
-        {% if user_id %}user_id: '{{user_id}}',{% endif %}
+        //email: '{{email_address}}',
+        //{% if user_id %}user_id: '{{user_id}}',{% endif %}
         name: '{{name}}',
-        {% if user_hash %}user_hash: '{{user_hash}}',{% endif %}
-        {% if enable_inbox %}
-        widget: {
-            activator: '{{css_selector}}',
-            use_counter: {{use_counter}},
-            activator_html: function ( obj ) {
-              return obj.activator_html_functions.brackets();
-            }
-          },{% endif %}
+        // {% if user_hash %}user_hash: '{{user_hash}}',{% endif %}
+        // {% if enable_inbox %}
+        // widget: {
+        //     activator: '{{css_selector}}',
+        //     use_counter: {{use_counter}},
+        //     activator_html: function ( obj ) {
+        //       return obj.activator_html_functions.brackets();
+        //     }
+        //   },{% endif %}
         custom_data: {{ custom_data|safe }},
         company: {{ company_data|safe }},
         created_at: {{user_created|date:"U"}}
       };
-      (function() {
-        function async_load() {
-          var s = document.createElement('script');
-          s.type = 'text/javascript'; s.async = true;
-          s.src = 'https://static.intercomcdn.com/intercom.v1.js';
-          var x = document.getElementsByTagName('script')[0];
-          x.parentNode.insertBefore(s, x);
-        }
-        if (window.attachEvent) {
-          window.attachEvent('onload', async_load);
-        } else {
-          window.addEventListener('load', async_load, false);
-        };
-      })();
+(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/{{intercom_appid}}';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+      // (function() {
+      //   function async_load() {
+      //     var s = document.createElement('script');
+      //     s.type = 'text/javascript'; s.async = true;
+      //     s.src = 'https://static.intercomcdn.com/intercom.v1.js';
+      //     var x = document.getElementsByTagName('script')[0];
+      //     x.parentNode.insertBefore(s, x);
+      //   }
+      //   if (window.attachEvent) {
+      //     window.attachEvent('onload', async_load);
+      //   } else {
+      //     window.addEventListener('load', async_load, false);
+      //   };
+      // })();
     </script>
 {% else %}
     <!-- Skipping intercom for this request -->
